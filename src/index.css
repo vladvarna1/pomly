@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-blush: #fff1f5;
+  --color-petal: #ffe4ec;
+  --color-rose: #f9a8c4;
+  --color-pink: #ec4899;
+  --color-berry: #be185d;
+  --color-cocoa: #4a2c3a;
+  --color-mint: #bbf7d0;
+  --color-mint-dark: #15803d;
+}
+
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-blush);
+  color: var(--color-cocoa);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 4px 16px rgb(236 72 153 / 0.12);
+  border: 2px solid var(--color-petal);
+}
+
+@keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+.floaty { animation: floaty 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) { .floaty { animation: none; } }
