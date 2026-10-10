@@ -56,7 +56,7 @@ export default function Settings() {
             <input className="input !w-20 text-center" inputMode="numeric" aria-label={`Дни за ${r.title}`} value={r.everyDays} onChange={(e) => db.routines.update(r.id!, { everyDays: Math.max(1, Number(e.target.value) || 1) })} />
           </div>
         ))}
-        <p className="text-xs text-cocoa/70">Парaзитна профилактика и ваксини следват графика на ветеринаря – добавяш ги в Здраве.</p>
+        <p className="text-xs text-cocoa/70">Паразитна профилактика и ваксини следват графика на ветеринаря – добавяш ги в Здраве.</p>
       </Card>
 
       <Card className="space-y-3">
@@ -83,7 +83,7 @@ export default function Settings() {
 
       <Card className="space-y-3">
         <h2 className="font-extrabold text-berry">💾 Резервно копие</h2>
-        <p className="text-sm">Последно: {s.lastBackup ? relDays(s.lastBackup) : 'още няма'}. Данните са само в този телефон – правиш копие, за да не се загубят.</p>
+        <p className="text-sm">Последно: {s.lastBackup ? relDays(s.lastBackup) : 'още няма'}. Данните са само в този телефон – направи копие, за да не се загубят.</p>
         <button className="btn w-full" onClick={async () => { download(`pomly-${isoDay(Date.now())}.json`, await exportBackup(), 'application/json'); say('Копието е свалено 💗') }}>⬇️ Свали копие</button>
         <button className="btn-soft w-full" onClick={() => fileRef.current?.click()}>⬆️ Върни от копие</button>
         <input ref={fileRef} type="file" accept="application/json,.json" className="hidden" onChange={async (e) => {

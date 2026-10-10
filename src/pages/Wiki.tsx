@@ -73,7 +73,7 @@ function ArticlePage() {
     <Page title={a.title} back="/wiki">
       <p className="text-sm font-semibold text-cocoa/70">{a.summary}</p>
       <div className="flex items-center justify-between text-xs font-bold text-cocoa/60">
-        <span>Преглеждано: {a.reviewed}</span>
+        <span>Последен преглед: {a.reviewed}</span>
         <button className={on ? 'btn !min-h-9' : 'btn-soft !min-h-9'} onClick={() => setKv('bookmarks', on ? marks.filter((m) => m !== a.slug) : [...marks, a.slug])}>{on ? '🔖 Запазена' : '🔖 Запази'}</button>
       </div>
       {a.art && <Art k={a.art} label={a.title} />}

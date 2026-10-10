@@ -155,7 +155,7 @@ function Clicker() {
     <Page title="Кликер" emoji="🔔" back="/train">
       <p className="text-center font-semibold">Натисни в момента на правилното поведение, после веднага лакомство.</p>
       <button className="mx-auto grid size-64 place-items-center rounded-full bg-pink text-6xl text-white shadow-xl shadow-pink/40 active:scale-95" aria-label="Кликер" onClick={() => { beep(2200, 40, 0.4); setN(n + 1) }}>🐾</button>
-      <p className="text-center text-sm font-bold">Кликове: {n} <button className="underline" onClick={() => setN(0)}>нулирай</button></p>
+      <p className="text-center text-sm font-bold">Кликове: {n} <button className="underline" onClick={() => setN(0)}>изчисти</button></p>
     </Page>
   )
 }

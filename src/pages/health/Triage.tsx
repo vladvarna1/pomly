@@ -41,7 +41,7 @@ export default function Triage() {
               {f}
             </label>
           ))}
-          {anyFlag ? <button className="btn-red w-full" onClick={showResult}>Виж какво да правя</button> : <button className="btn w-full" onClick={() => setStep('pick')}>Нищо от това →</button>}
+          {anyFlag ? <button className="btn-red w-full" onClick={showResult}>Виж какво да направя</button> : <button className="btn w-full" onClick={() => setStep('pick')}>Нищо от това →</button>}
         </Card>
       )}
 

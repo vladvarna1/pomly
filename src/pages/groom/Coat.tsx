@@ -31,7 +31,7 @@ export default function Coat() {
         <label className="btn mt-2 cursor-pointer">📸 Месечна снимка
           <input type="file" accept="image/*" className="hidden" onChange={async (e) => { const f = e.target.files?.[0]; if (f) setAdding(await compressImage(f)) }} />
         </label>
-        <p className="mt-2 text-xs text-cocoa/70">Една снимка на месец е достатъчна да видиш как се променя козинката.</p>
+        <p className="mt-2 text-xs text-cocoa/70">Една снимка на месец е достатъчна, за да видиш как се променя козинката.</p>
       </Card>
 
       {adding && (
@@ -42,7 +42,7 @@ export default function Coat() {
           </select>
           {showBald && (
             <p className="rounded-2xl bg-amber-100 p-3 text-sm font-semibold text-amber-900">
-              Спокойно 💗 Голи места при възрастно куче си струва да се покажат на ветеринаря, за да се изключат медицински причини. Това не е диагноза.{' '}
+              Спокойно 💗 Голите места при възрастно куче е добре да се покажат на ветеринаря, за да се изключат медицински причини. Това не е диагноза.{' '}
               <Link to="/wiki/hair-loss" className="underline">Прочети повече</Link>
             </p>
           )}

@@ -55,7 +55,7 @@ export default function Weight() {
             </ResponsiveContainer>
           </div>
         )}
-        <p className="mt-1 text-xs text-cocoa/70">Зеленото е типичен диапазон за възрастна померания (по AKC) – „норма за породата, не цел“. Дарси си е Дарси 💗</p>
+        <p className="mt-1 text-xs text-cocoa/70">Зеленото е типичен диапазон за възрастен померан (по AKC) – „норма за породата, не цел“. Дарси си е Дарси 💗</p>
       </Card>
 
       <Card>

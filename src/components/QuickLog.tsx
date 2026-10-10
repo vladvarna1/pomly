@@ -118,7 +118,7 @@ export default function QuickLog() {
 
       {mode === 'med' && (
         <Sheet title="Дадено лекарство" onClose={() => setMode(null)}>
-          <p className="rounded-2xl bg-amber-100 p-2 text-xs font-bold text-amber-900">Никога не давай човешки лекарства без ветеринар.</p>
+          <p className="rounded-2xl bg-amber-100 p-2 text-xs font-bold text-amber-900">Никога не давай човешки лекарства без указание от ветеринаря.</p>
           {!meds?.length && <p className="text-sm">Още няма добавени лекарства. Добави ги от Здраве → Лекарства.</p>}
           {meds?.map((m) => (
             <button key={m.id} className="btn-soft w-full" onClick={(e) => log('med', m.name, e, undefined, { medId: m.id })}>💊 {m.name}</button>

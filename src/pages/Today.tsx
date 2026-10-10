@@ -64,7 +64,7 @@ export default function Today() {
     const old = w.filter((x) => cur && cur.ts - x.ts >= 20 * DAY && cur.ts - x.ts <= 45 * DAY).at(-1)
     if (cur && old && Math.abs(cur.kg - old.kg) / old.kg > 0.1) warn.push(`Теглото се е променило с над 10% за месец (${old.kg} → ${cur.kg} кг). Спомени го на ветеринаря.`)
     const t = extra.logs.filter((l) => l.type === 'teeth').at(-1)
-    if (routines?.length && (!t || daysAgo(t.ts) > 7) && routines.some((r) => r.key === 'teeth')) warn.push('Не са мити зъбки от повече от 7 дни.')
+    if (routines?.length && (!t || daysAgo(t.ts) > 7) && routines.some((r) => r.key === 'teeth')) warn.push('Зъбките не са били мити повече от 7 дни.')
     const open = extra.symptoms.filter((s) => !s.resolved).length
     if (open) warn.push(`Имаш ${open} неразрешен${open > 1 ? 'и' : ''} симптом${open > 1 ? 'а' : ''}.`)
   }

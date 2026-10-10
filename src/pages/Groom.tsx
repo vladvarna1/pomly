@@ -63,7 +63,7 @@ function Dashboard() {
 
       <Card className="!border-amber-300 text-sm">
         <p className="font-extrabold text-berry">🚫 Никога не бръснем Дарси</p>
-        <p>Помераните имат двоен слой козина. Бръсненето може да доведе до неравномерно или никакво порастване. Подстригване на дължина ≠ бръснене – питай грууминг салона за „леко оформяне“. <Link className="font-extrabold underline" to="/wiki/never-shave">Повече</Link></p>
+        <p>Помераните имат двоен слой козина. Бръсненето може да доведе до неравномерно порастване или козината изобщо да не порасне. Подстригването на по-късо ≠ бръснене – питай грууминг салона за „леко оформяне“. <Link className="font-extrabold underline" to="/wiki/never-shave">Повече</Link></p>
       </Card>
 
       <Card>

@@ -22,7 +22,7 @@ export function Vaccines() {
   const status = (n?: number) => (!n ? null : n < startOfDay(Date.now()) ? <span className="chip chip-bad">просрочена</span> : n < Date.now() + 30 * DAY ? <span className="chip chip-warn">наближава</span> : <span className="chip chip-ok">наред</span>)
   return (
     <Page title="Ваксини и паразити" emoji="💉" back="/health">
-      <p className="text-sm">Записваш това, което ветеринарят е дал, и кога е следващото. Приложението не предписва график.</p>
+      <p className="text-sm">Тук записваш какво е дал ветеринарят и кога е следващото. Приложението не предписва график.</p>
       <Add onClick={() => setOpen(true)}>Добави</Add>
       {list?.length === 0 && <Card><Empty emoji="💉" text="Още няма записи – добави първата ваксина" /></Card>}
       {list?.sort((a, b) => b.date - a.date).map((v) => (
@@ -59,7 +59,7 @@ export function Meds() {
   const state = (id?: number) => today?.find((l) => l.data?.medId === id)
   return (
     <Page title="Лекарства" emoji="💊" back="/health">
-      <p className="rounded-2xl bg-amber-100 p-3 text-sm font-bold text-amber-900">⚠️ Никога не давай човешки лекарства без ветеринар. Приложението не предлага и не изчислява дози – пиши точно каквото ти е казал ветеринарят.</p>
+      <p className="rounded-2xl bg-amber-100 p-3 text-sm font-bold text-amber-900">⚠️ Никога не давай човешки лекарства без указание от ветеринаря. Приложението не предлага и не изчислява дози – пиши точно това, което ти е казал ветеринарят.</p>
       <Add onClick={() => setOpen(true)}>Добави лекарство</Add>
       {meds?.length === 0 && <Card><Empty emoji="💊" text="Няма добавени лекарства" /></Card>}
       {meds?.map((m) => {

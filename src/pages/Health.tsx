@@ -54,7 +54,7 @@ function Dashboard() {
         <Card className="!p-3"><p className="text-xs font-bold text-cocoa/70">Лекарства днес</p><p className="text-xl font-extrabold text-berry">{d.meds || '–'}</p></Card>
         <Card className="!p-3"><p className="text-xs font-bold text-cocoa/70">Следващ преглед</p><p className="font-extrabold text-berry">{nextVisit ? fmtDate(nextVisit.followUp!) : '–'}</p></Card>
       </div>
-      {d.sym > 0 && <Link to="/health/symptoms" className="card block !border-amber-300 font-bold">🤒 {d.sym} отворен(и) симптом(а)</Link>}
+      {d.sym > 0 && <Link to="/health/symptoms" className="card block !border-amber-300 font-bold">🤒 Отворени симптоми: {d.sym}</Link>}
       <MenuLink to="/health/weight" emoji="⚖️" label="Тегло" sub="Графика и история" />
       <MenuLink to="/health/vaccines" emoji="💉" label="Ваксини и паразити" />
       <MenuLink to="/health/meds" emoji="💊" label="Лекарства" />
