@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link, Route, Routes, useParams } from 'react-router-dom'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { getKv, setKv } from '../db/db'
-import { articles, categories, renderMd, search, startHere } from '../lib/wiki'
+import { articles, categories, search, splitBody, startHere } from '../lib/wiki'
+import Art from '../components/Art'
 import { shaveWords } from '../content/groom'
 import { Card, Disclaimer, Empty, Page } from '../components/ui'
 
@@ -75,7 +76,12 @@ function ArticlePage() {
         <span>Преглеждано: {a.reviewed}</span>
         <button className={on ? 'btn !min-h-9' : 'btn-soft !min-h-9'} onClick={() => setKv('bookmarks', on ? marks.filter((m) => m !== a.slug) : [...marks, a.slug])}>{on ? '🔖 Запазена' : '🔖 Запази'}</button>
       </div>
-      <Card><div className="prose" dangerouslySetInnerHTML={{ __html: renderMd(a.body) }} /></Card>
+      {a.art && <Art k={a.art} label={a.title} />}
+      <Card>
+        {splitBody(a.body).map((part, i) => 'art' in part
+          ? <div key={i} className="my-3"><Art k={part.art} /></div>
+          : <div key={i} className="prose" dangerouslySetInnerHTML={{ __html: part.html }} />)}
+      </Card>
       {a.vet && <Card className="!border-red-300"><p className="font-extrabold text-red-700">🩺 Кога към ветеринар</p><p className="text-sm">{a.vet}</p></Card>}
       {a.related.length > 0 && (<><h2 className="font-extrabold text-berry">Свързани</h2>{a.related.map((s) => <Row key={s} slug={s} />)}</>)}
       <Card className="text-xs"><b>Източници:</b><ul className="list-disc pl-5">{a.sources.map((s) => <li key={s}>{s}</li>)}</ul></Card>

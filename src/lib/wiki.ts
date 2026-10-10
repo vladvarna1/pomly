@@ -5,6 +5,7 @@ export interface Article {
   title: string
   category: string
   summary: string
+  art: string
   reviewed: string
   vet: string
   sources: string[]
@@ -26,6 +27,7 @@ function parse(path: string, text: string): Article {
     title: meta.title ?? '',
     category: meta.category ?? 'Друго',
     summary: meta.summary ?? '',
+    art: meta.art ?? '',
     reviewed: meta.reviewed ?? '',
     vet: meta.vet ?? '',
     sources: (meta.sources ?? '').split('|').map((s) => s.trim()).filter(Boolean),
@@ -65,3 +67,23 @@ export function renderMd(md: string): string {
   close()
   return out.join('')
 }
+
+/** Split an article body into text chunks and inline picture markers like [[art:sections]] */
+export function splitBody(body: string): ({ html: string } | { art: string })[] {
+  const parts: ({ html: string } | { art: string })[] = []
+  let buf: string[] = []
+  const flush = () => {
+    if (buf.join('').trim()) parts.push({ html: renderMd(buf.join('\n')) })
+    buf = []
+  }
+  for (const line of body.split('\n')) {
+    const m = line.trim().match(/^\[\[art:([\w-]+)\]\]$/)
+    if (m) {
+      flush()
+      parts.push({ art: m[1] })
+    } else buf.push(line)
+  }
+  flush()
+  return parts
+}
+

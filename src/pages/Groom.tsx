@@ -6,6 +6,7 @@ import { useRoutineStatus } from '../lib/routines'
 import { fmtDate, relDays } from '../lib/util'
 import { coatStages, sessions, tools } from '../content/groom'
 import { Card, MenuLink, Page } from '../components/ui'
+import Art from '../components/Art'
 import Session from './groom/Session'
 import Coat from './groom/Coat'
 import BodyMap from './groom/BodyMap'
@@ -84,7 +85,13 @@ function Tools() {
   return (
     <Page title="Инструменти" emoji="🧰" back="/groom">
       {tools.map((t) => (
-        <Card key={t.name}><p className="font-extrabold text-berry">{t.name}</p><p className="text-sm">{t.text}</p></Card>
+        <Card key={t.name} className="space-y-2">
+          <Art k={t.art} label={t.name} />
+          <p className="font-extrabold text-berry">{t.name}</p>
+          <p className="text-sm">{t.what}</p>
+          <ul className="list-disc pl-5 text-sm">{t.how.map((h) => <li key={h}>{h}</li>)}</ul>
+          <p className="rounded-2xl bg-petal p-2 text-sm font-bold">💡 {t.tip}</p>
+        </Card>
       ))}
       <p className="text-xs text-cocoa/70">Без препратки към магазини – избери каквото е удобно за Дарси.</p>
     </Page>

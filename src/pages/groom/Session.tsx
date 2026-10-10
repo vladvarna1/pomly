@@ -6,6 +6,7 @@ import { compressImage } from '../../lib/util'
 import { sessions } from '../../content/groom'
 import { Card, Page } from '../../components/ui'
 import { celebrate } from '../../components/Celebrate'
+import Art from '../../components/Art'
 
 const moods = ['😌', '😐', '😣']
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
@@ -73,7 +74,7 @@ export default function Session() {
               {t}
             </label>
           ))}
-          <p className="text-sm text-cocoa/70">Екранът няма да угасва по време на сесията.</p>
+          <p className="text-sm text-cocoa/70">⏱️ Приблизително време: {s.time}. Екранът няма да угасва по време на сесията.</p>
           <button className="btn w-full" onClick={() => { started.current = Date.now(); setPhase('step') }}>Започваме! 💗</button>
         </Card>
       )}
@@ -83,9 +84,10 @@ export default function Session() {
           <div className="flex justify-between text-sm font-bold"><span>Стъпка {i + 1} от {s.steps.length}</span><span>⏱️ {mmss(total)}</span></div>
           <div className="h-2 overflow-hidden rounded-full bg-petal"><div className="h-full bg-pink transition-all" style={{ width: `${(i / s.steps.length) * 100}%` }} /></div>
           <Card className="space-y-3 text-center">
-            <div className="text-6xl" aria-hidden>{step.emoji}</div>
+            <Art k={step.art} label={step.title} />
             <h2 className="text-xl font-extrabold text-berry">{step.title}</h2>
             <p className="text-lg leading-snug">{step.text}</p>
+            <ul className="space-y-1 rounded-2xl bg-petal/60 p-3 text-left text-sm">{step.how.map((h) => <li key={h}>👉 {h}</li>)}</ul>
             {step.seconds && <p className="text-sm font-bold text-cocoa/70">⏳ {mmss(Math.max(0, step.seconds - stepT))} {stepT >= step.seconds && '– готово!'}</p>}
             <button className="btn-soft w-full" onClick={() => setWhy(!why)} aria-expanded={why}>Защо е важно? {why ? '▲' : '▼'}</button>
             {why && <p className="rounded-2xl bg-petal p-3 text-left text-sm">{step.why}</p>}

@@ -4,7 +4,8 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db, getKv, setKv } from '../db/db'
 import { useCurrentDog } from '../lib/dog'
 import { beep } from '../lib/util'
-import { courses } from '../content/training'
+import { basics, courses } from '../content/training'
+import Art from '../components/Art'
 import { Card, Disclaimer, Empty, MenuLink, Page } from '../components/ui'
 import { celebrate } from '../components/Celebrate'
 
@@ -34,6 +35,14 @@ function Home() {
         <Link to="/train/potty" className="btn-soft !flex-col !rounded-3xl !py-3">🚽 Дневник тоалетна</Link>
         <Link to="/train/barks" className="btn-soft !flex-col !rounded-3xl !py-3">📣 Дневник лаене</Link>
       </div>
+      <h2 className="font-extrabold text-berry">Основни правила</h2>
+      {basics.map((b) => (
+        <Card key={b.title} className="space-y-2 !p-3">
+          <Art k={b.art} />
+          <p className="font-extrabold">{b.title}</p>
+          <p className="text-sm">{b.text}</p>
+        </Card>
+      ))}
       <h2 className="font-extrabold text-berry">Курсове</h2>
       {courses.map((c) => (
         <MenuLink key={c.id} to={`/train/c/${c.id}`} emoji={c.emoji} label={c.title} sub={`${c.lessons.filter((l) => m.includes(`${c.id}/${l.id}`)).length}/${c.lessons.length} усвоени · ${c.blurb}`} />
@@ -90,14 +99,24 @@ function LessonPage() {
 
   return (
     <Page title={l.title} emoji="📚" back={`/train/c/${c.id}`}>
-      <Card className="space-y-2 text-sm">
+      <Art k={l.art} label={l.title} />
+      <Card className="space-y-3 text-sm">
         <p><b>🎯 Цел:</b> {l.goal}</p>
         <p><b>🐾 Защо за помераните:</b> {l.why}</p>
-        <b>Стъпки:</b>
-        <ol className="list-decimal pl-5">{l.steps.map((s) => <li key={s}>{s}</li>)}</ol>
-        <b>Чести грешки:</b>
-        <ul className="list-disc pl-5">{l.mistakes.map((s) => <li key={s}>{s}</li>)}</ul>
-        <p><b>Ако не се получава:</b> {l.fix}</p>
+        <p><b>⏱️ Колко време:</b> {l.time}</p>
+        <div><b>🧺 Приготви:</b><ul className="list-disc pl-5">{l.prep.map((x) => <li key={x}>{x}</li>)}</ul></div>
+      </Card>
+      <h2 className="font-extrabold text-berry">Стъпка по стъпка</h2>
+      {l.steps.map((st, i) => (
+        <Card key={i} className="space-y-2 !p-3">
+          <p className="flex gap-2 text-sm"><span className="grid size-7 shrink-0 place-items-center rounded-full bg-pink font-extrabold text-white">{i + 1}</span><span className="pt-0.5">{st.t}</span></p>
+          {st.a && <Art k={st.a} />}
+        </Card>
+      ))}
+      <Card className="space-y-3 text-sm">
+        <div><b>⚠️ Чести грешки:</b><ul className="list-disc pl-5">{l.mistakes.map((x) => <li key={x}>{x}</li>)}</ul></div>
+        <div><b>🔧 Ако не се получава:</b><ul className="list-disc pl-5">{l.fix.map((x) => <li key={x}>{x}</li>)}</ul></div>
+        <p className="rounded-2xl bg-mint p-2 font-bold text-mint-dark">✅ {l.done}</p>
       </Card>
 
       {!practice ? <button className="btn w-full" onClick={() => setPractice(true)}>▶️ Практика</button> : (

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { db, getKv } from '../../db/db'
 import { useCurrentDog } from '../../lib/dog'
-import { evaluate, levelInfo, paths, universalFlags, type Path } from '../../content/triage/triage'
+import { evaluate, levelInfo, pathExtra, paths, universalFlags, type Path } from '../../content/triage/triage'
+import Art from '../../components/Art'
 import { Card, Disclaimer, Page } from '../../components/ui'
 import type { Contacts } from '../Settings'
 import { compressImage } from '../../lib/util'
@@ -55,6 +56,7 @@ export default function Triage() {
 
       {step === 'q' && path && (
         <Card className="space-y-3 text-center">
+          {pathExtra[path.id] && <Art k={pathExtra[path.id].art} />}
           <p className="text-sm font-bold text-cocoa/70">{path.title} · въпрос {qi + 1}/{path.questions.length}</p>
           <p className="text-lg font-extrabold">{path.questions[qi].q}</p>
           <div className="flex gap-2">
@@ -78,7 +80,9 @@ export default function Triage() {
             <p>{info.text}</p>
             {path?.advice?.[level] && !anyFlag && <p className="rounded-2xl bg-petal p-3 text-left text-sm">{path.advice[level]}</p>}
             {anyFlag && <p className="rounded-2xl bg-petal p-3 text-left text-sm">Не предизвиквай повръщане и не давай лекарства вкъщи. Тръгвай и се обади по пътя.</p>}
-            {level === 'green' && <p className="text-sm">Обади се, ако се появи ново оплакване, ако стане по-зле или не се подобри.</p>}
+            {path && pathExtra[path.id] && !anyFlag && (
+              <div className="rounded-2xl bg-petal p-3 text-left text-sm"><p className="font-extrabold">👀 Наблюдавай и се върни, ако:</p><ul className="list-disc pl-5">{pathExtra[path.id].watch.map((w) => <li key={w}>{w}</li>)}</ul></div>
+            )}
             {level !== 'green' && (phone
               ? <a className="btn-red w-full" href={`tel:${phone}`}>📞 Обади се на моя ветеринар</a>
               : <Link className="btn-soft w-full" to="/settings">Добави телефон на ветеринар в Настройки</Link>)}
